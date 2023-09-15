@@ -19,7 +19,7 @@ import com.demonstration.repo.TacheRepository;
 
 @RestController
 @RequestMapping("tache")
-@CrossOrigin(origins = "")
+@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 public class TacheController {
 @Autowired 
 TacheRepository tacheRepository;
@@ -28,12 +28,14 @@ public List<Tache> getAll()
 {
 return (List<Tache>) tacheRepository.findAll();	
 }
+
 @PostMapping
 public Tache addOne(@RequestBody @Valid Tache tache)
 {
 	return tacheRepository.save(tache);
 }
-@DeleteMapping
+
+@DeleteMapping("/{id}")
 public void deleteOne(@PathVariable long id)
 {
 tacheRepository.deleteById(id);	
